@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Assignment 6 part 1 </title>
+	<style type="text/css">
+		html,body,input {font-size:30px;}
+		h1 {text-align: center; font-size: 45px}
+		backgroundcolor:
+	</style>
+	<script language="javascript"> 
+		function getRand(minValue, maxValue)
+		{
+			range = maxValue - minValue;
+			n = Math.random() * range + minValue;
+			n = parseInt(n);
+			return n;
+		}
+		array = [];
+		for (let i = 0; i < 5; i++){
+			array[i] = getRand(1, 48);
+			while (array[i] == array[i - 1]){
+				array[i] = getRand(1, 48);
+			}
+		}
+		n6 = getRand(1, 18);
+		for (let i = 0; i < 5; i++) {
+			document.write(array[i], " ");
+		}
+		document.write("Lucky ball number: ", n6);
+		document.write("<br>");
+		array.sort(function(a, b) {return a-b});
+		for (let i = 0; i < 5; i++) {
+			document.write(array[i], " ");
+		}
+		document.write("Lucky ball number: ", n6);
+		function calculate ()
+		{
+			string = document.form1.numbers.value;
+			luckyBall = parseInt(document.form1.lucky.value);
+			userEntry = string.split(" ");
+			for (let i = 0; i < 4; i++) {
+				userEntry[i] = parseInt(userEntry[i]);
+			}
+			matches = 0;
+			for (let i = 0; i < 5; i++) {
+				for (let j = 0; j <5; j++) {
+					if (array[i] == userEntry[j]) {
+						matches = matches + 1;
+					} 
+				}
+			}
+			if (matches == 5 && n6 == luckyBall) {
+				document.getElementById("winnings").innerHTML = "$7,000 a WEEK for LIFE!";
+			} else if (matches == 5 && n6 !== luckyBall) {
+				document.getElementById("winnings").innerHTML = "$25,000 a YEAR for LIFE!";
+			} else if (matches == 4 && n6 == luckyBall) {
+				document.getElementById("winnings").innerHTML = "$5,000";
+			} else if (matches == 4 && n6 !== luckyBall) {
+				document.getElementById("winnings").innerHTML = "$200";
+			} else if (matches == 3 && n6 == luckyBall) {
+				document.getElementById("winnings").innerHTML = "$150";
+			} else if (matches == 3 && n6 !== luckyBall) {
+				document.getElementById("winnings").innerHTML = "$20";
+			} else if (matches == 2 && n6 == luckyBall) {
+				document.getElementById("winnings").innerHTML = "$25";
+			} else if (matches == 2 && n6 !== luckyBall) {
+				document.getElementById("winnings").innerHTML = "$3";
+			} else if (matches == 1 && n6 == luckyBall) {
+				document.getElementById("winnings").innerHTML = "$6";
+			} else if (matches == 0 && n6 == luckyBall) {
+				document.getElementById("winnings").innerHTML = "$4";
+			} else {
+				document.getElementById("winnings").innerHTML = "$0";
+			}
+			
+		}
+
+
+
+	</script>
+</head>
+<body>
+	<h1><u> Lucky for Life Lotto </u></h1>
+	<form name="form1">
+			Please enter your numbers <input type="text" name="numbers" id="numbers"><br />
+			Please enter your lucky ball number <input type="text" name="lucky" id="lucky"><br />
+			<input type="button" value = "Check my winnings" 
+			   onclick ="calculate()"><br />
+			<hr>
+			<h3>Your Winnings: </h3><h3 id = "winnings"> </h3>
+
+	</form> 
+
+</body>
+
+</html>
